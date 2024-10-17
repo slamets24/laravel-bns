@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('url_shopee');
             $table->string('url_tokped');
             $table->string('url_wa');
-            $table->bigIncrements('id_url_image');
-            $table->bigIncrements('id_color');
-            $table->bigIncrements('id_user');
+            $table->unsignedInteger('id_url_image');
+            $table->unsignedInteger('id_color');
+            $table->unsignedInteger('id_user');
             $table->timestamps();
         });
     }

@@ -26,8 +26,8 @@
                 </a>
             </li>
             <li>
-                <a href="#"
-                    class="block py-2 px-4 rounded-md {{ request()->routeIs('product.*') ? 'bg-gray-700' : 'hover:bg-gray-700' }}">
+                <a href="{{ route('products.index') }}"
+                    class="block py-2 px-4 rounded-md {{ request()->routeIs('products.*') ? 'bg-gray-700' : 'hover:bg-gray-700' }}">
                     Produk
                 </a>
             </li>

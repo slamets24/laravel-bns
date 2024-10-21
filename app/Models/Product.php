@@ -21,4 +21,19 @@ class Product extends Model
         'id_color',
         'id_user'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function colors()
+    {
+        return $this->hasMany(color::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

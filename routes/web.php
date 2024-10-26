@@ -17,6 +17,10 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/users', UserController::class);
     Route::resource('/products', ProductController::class);
+    Route::post('/products/{product}/images', [ProductController::class, 'addImages'])->name('products.addImages');
+    Route::post('/products/{product}/color', [ProductController::class, 'addColor'])->name('products.addColor');
+    Route::delete('/products/{product}/color/{color}', [ProductController::class, 'destroyColor'])->middleware('check.remaining.colors')->name('products.destroyColor');
+    Route::delete('/products/{product}/image/{image}', [ProductController::class, 'destroyImage'])->middleware('check.remaining.images')->name('products.destroyImage');
 });
 
 Route::middleware('auth')->group(function () {

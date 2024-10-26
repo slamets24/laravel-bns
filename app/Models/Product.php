@@ -17,9 +17,8 @@ class Product extends Model
         'url_shopee',
         'url_tokped',
         'url_wa',
-        'id_url_image',
-        'id_color',
-        'id_user'
+        'slug',
+        'user_id'
     ];
 
     public function user()
@@ -29,7 +28,7 @@ class Product extends Model
 
     public function colors()
     {
-        return $this->hasMany(color::class);
+        return $this->hasMany(Color::class);
     }
 
     public function images()

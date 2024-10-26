@@ -14,10 +14,10 @@
         </ol>
     </nav>
 
-    <form action="{{ route('products.store') }}" enctype="multipart/form-data" method="POST" novalidate>
+    <form action="{{ route('products.store') }}" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="form-1">
-            <h1 class="mb-6 text-xl font-bold text-black-dashboard dark:text-white-dahsboard">Tambah Artikel</h1>
+            <h1 class="mb-6 text-xl font-bold text-black-dashboard dark:text-white-dahsboard">Tambah Produk</h1>
 
             <div class="px-6 py-6 mb-6 bg-white rounded-lg shadow-lg dark:bg-black">
                 <label for="image" class="block mb-2 text-sm font-medium text-black dark:text-white">
@@ -26,8 +26,8 @@
                 <p class="text-xs font-medium text-gray-400">* Pastikan file bertipe jpeg, jpg, png</p>
                 <p class="text-xs font-medium text-gray-400">* Maksimal file 1MB</p>
                 <div id="imagePreviewContainer" class="flex flex-wrap gap-5 mt-3"></div>
-                <input type="file" accept="image/*" name="image[]" id="image" class="mt-3">
-                <x-partials.dashboard.input-error :messages="$errors->get('image')" />
+                <input type="file" accept="image/*" name="images[]" id="images" class="mt-3" multiple>
+                <x-partials.dashboard.input-error :messages="$errors->get('images.')" />
             </div>
 
             <div class="px-6 py-6 mb-6 bg-white rounded-lg shadow-lg dark:bg-black">
@@ -86,7 +86,7 @@
                                 {{ old('category') == 'abaya' ? 'selected' : '' }}>
                                 Abaya</option>
                         </select>
-                        <x-partials.dashboard.input-error :messages="$errors->get('role')" />
+                        <x-partials.dashboard.input-error :messages="$errors->get('category')" />
                     </div>
                 </div>
 
@@ -94,9 +94,9 @@
                     <div class="w-full">
                         <label for="url_shopee"
                             class="block mb-3 text-sm font-medium text-black-dashboard dark:text-white-dahsboard">
-                            Link Shopee <span class="text-red-500">*</span>
+                            Link Shopee
                         </label>
-                        <input type="text" required name="url_shopee" autocomplete="url_shopee" maxlength="75"
+                        <input type="text" name="url_shopee" autocomplete="url_shopee" maxlength="75"
                             placeholder="Masukan Link Shopee" value="{{ old('url_shopee') }}"
                             class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black-dashboard outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white-dahsboard dark:focus:border-primary">
                         <x-partials.dashboard.input-error :messages="$errors->get('url_shopee')" />
@@ -105,9 +105,9 @@
                     <div class="w-full">
                         <label for="url_tokped"
                             class="block mb-3 text-sm font-medium text-black-dashboard dark:text-white-dahsboard">
-                            Link Tokped <span class="text-red-500">*</span>
+                            Link Tokped
                         </label>
-                        <input type="text" required name="url_tokped" autocomplete="url_tokped" maxlength="75"
+                        <input type="text" name="url_tokped" autocomplete="url_tokped" maxlength="75"
                             placeholder="Masukan Link Tokped" value="{{ old('url_tokped') }}"
                             class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black-dashboard outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white-dahsboard dark:focus:border-primary">
                         <x-partials.dashboard.input-error :messages="$errors->get('url_tokped')" />
@@ -137,12 +137,12 @@
                         <x-partials.dashboard.input-error :messages="$errors->get('colors.1')" />
                     </div>
 
-                    <div id="newFacilityRow" class="mt-6"></div>
+                    <div id="newColorRow" class="mt-6"></div>
 
                     <div class="">
                         <button type="button" id="addColorRowButton"
                             class="px-6 py-3 text-white transition-colors duration-300 ease-in-out rounded bg-gray-800 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary">
-                            Tambah Fasilitas </button>
+                            Tambah Jenis Warna </button>
                     </div>
                 </div>
             </div>
@@ -153,6 +153,25 @@
             </button>
         </div>
     </form>
+
+    <script>
+        document.getElementById('images').addEventListener('change', function(event) {
+            const files = event.target.files;
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            imagePreviewContainer.innerHTML = ''; // Clear previous images
+
+            for (const file of files) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'w-32 h-32 object-cover rounded-lg';
+                    imagePreviewContainer.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 
     <script>
         let colorCount = 1;
@@ -170,7 +189,7 @@
 
             const newRow = document.createElement("div");
             newRow.innerHTML = html;
-            newFacilityRow.appendChild(newRow);
+            newColorRow.appendChild(newRow);
         });
     </script>
 </x-app-layout>

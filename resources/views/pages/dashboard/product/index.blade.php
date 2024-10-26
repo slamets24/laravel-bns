@@ -55,11 +55,18 @@
         <tbody>
             @foreach ($products as $product)
                 <tr>
-                    <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $product->image }}</td>
-                    <td>{{ $product->nama }}</td>
-                    <td>{{ $product->harga }}</td>
-                    <td>{{ $product->kategori }}</td>
-                    <td>{{ $product->varian }}</td>
+                    <td><img src="{{ Storage::url($product->images[0]->name) }}" alt=""
+                            style="width: 100px; height: auto;"></td>
+                    <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $product->name }}</td>
+                    <td>Rp. {{ number_format($product->price) }}</td>
+                    <td>{{ $product->category }}</td>
+                    <td>
+                        @foreach ($product->colors as $color)
+                            {{ $color->name }}@if (!$loop->last)
+                                ,
+                            @endif
+                        @endforeach
+                    </td>
 
                     {{-- td aksi --}}
                     <td>

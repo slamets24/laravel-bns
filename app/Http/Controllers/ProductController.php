@@ -216,7 +216,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->colors()->delete();
+        $product->images()->delete();
+        $product->delete();
+
+        Alert::toast('Berhasil menghapus data Produk', 'success');
+        return redirect()->route('products.index');
     }
 
     public function destroyColor(string $product, string $color)

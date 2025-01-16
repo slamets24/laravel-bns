@@ -1,20 +1,21 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
-    return view('pages.dashboard.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/product/{slug}', [FrontendController::class, 'product'])->name('detailProduct');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pages.dashboard.index');
+    })->name('dashboard');
+
     Route::resource('/users', UserController::class);
     Route::resource('/products', ProductController::class);
     Route::post('/products/{product}/images', [ProductController::class, 'addImages'])->name('products.addImages');

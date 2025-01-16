@@ -14,7 +14,7 @@
     {{-- Button add product --}}
     <a href="{{ route('products.create') }}"
         class="z-10 bg-green-700 text-white inline-block px-3 py-3 mb-5 rounded bg-primary text-white-dahsboard">Tambah
-        Pengguna</a>
+        Produk</a>
 
 
     <table id="search-table">

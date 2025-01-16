@@ -76,7 +76,14 @@
                         <button data-modal-target="popup-modal-{{ $product->id }}"
                             data-modal-toggle="popup-modal-{{ $product->id }}" type="button"
                             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Hapus</button>
-
+                        <form action="{{ route('products.toggle-favorite', $product->id) }}" method="POST"
+                            style="display: inline;">
+                            @csrf
+                            <button type="submit"
+                                class="focus:outline-none {{ $product->is_favorit ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-green-500 hover:bg-green-600 text-white' }} focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                                {{ $product->is_favorit ? 'Unfavorite' : 'Favorite' }}
+                            </button>
+                        </form>
                         <!-- Modal -->
                         <div id="popup-modal-{{ $product->id }}" tabindex="-1"
                             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">

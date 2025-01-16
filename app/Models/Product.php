@@ -18,6 +18,7 @@ class Product extends Model
         'url_tokped',
         'url_wa',
         'slug',
+        'is_favorit',
         'user_id'
     ];
 

@@ -12,14 +12,14 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        $newsProducts = Product::with('images')->latest()->limit(4)->get();
+        $favoritProducts = Product::with('images')->where('is_favorit', true)->limit(4)->get();
 
         $products = Product::with('images')->paginate(8);
 
-        return view('pages.visitor.index', compact('products', 'newsProducts'));
+        return view('pages.visitor.index', compact('products', 'favoritProducts'));
     }
 
-    public function product($slug)
+    public function detailProduct($slug)
     {
         $detailProduct = Product::with(['colors', 'images'])->where('slug', $slug)->first();
 
@@ -31,5 +31,13 @@ class FrontendController extends Controller
         $newsProducts = Product::with('images')->latest()->limit(4)->get();
 
         return view('pages.visitor.detail-product', compact('detailProduct', 'images', 'colors', 'newsProducts'));
+    }
+
+    public function product()
+    {
+        // Ambil semua produk untuk ditampilkan
+        $products = Product::paginate(16); // 4x4 grid = 16 produk per halaman
+
+        return view('pages.visitor.product', compact('products'));
     }
 }

@@ -6,13 +6,13 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CardBestProduct extends Component
+class CardNewProduct extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public $favoritProduct
+        public $newsProduct
     ) {
         //
     }
@@ -22,6 +22,6 @@ class CardBestProduct extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.partials.visitor.card-best-product');
+        return view('components.partials.visitor.card-new-product');
     }
 }

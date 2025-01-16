@@ -55,16 +55,22 @@
                             class="flex items-center justify-center w-full sm:w-auto bg-green-500 px-4 py-2 rounded-md text-white text-sm font-medium shadow-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-green-500">
                             WhatsApp
                         </a>
-                        <!-- Tombol Shopee -->
-                        <a href="{{ $detailProduct->url_shopee }}"
-                            class="flex items-center justify-center w-full sm:w-auto bg-orange-500 px-4 py-2 mt-2 sm:mt-0 rounded-md text-white text-sm font-medium shadow-md hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                            Shopee
-                        </a>
-                        <!-- Tombol Tokopedia -->
-                        <a href="{{ $detailProduct->url_tokped }}"
-                            class="flex items-center justify-center w-full sm:w-auto bg-green-600 px-4 py-2 mt-2 sm:mt-0 rounded-md text-white text-sm font-medium shadow-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-600">
-                            Tokopedia
-                        </a>
+
+                        @if ($detailProduct->url_shopee)
+                            <!-- Tombol Shopee -->
+                            <a href="{{ $detailProduct->url_shopee }}"
+                                class="flex items-center justify-center w-full sm:w-auto bg-orange-500 px-4 py-2 mt-2 sm:mt-0 rounded-md text-white text-sm font-medium shadow-md hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                Shopee
+                            </a>
+                        @endif
+
+                        @if ($detailProduct->url_tokped)
+                            <!-- Tombol Tokopedia -->
+                            <a href="{{ $detailProduct->url_tokped }}"
+                                class="flex items-center justify-center w-full sm:w-auto bg-green-600 px-4 py-2 mt-2 sm:mt-0 rounded-md text-white text-sm font-medium shadow-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-600">
+                                Tokopedia
+                            </a>
+                        @endif
                     </div>
                 </div>
 
@@ -74,15 +80,15 @@
 
     <section class="w-full py-8 bg-gray-100">
         <div class="px-4 mx-auto max-w-5xl overflow-hidden">
-            <h2 class="text-xl font-bold text-center mb-6">Produk Terpopuler</h2>
+            <h2 class="text-xl font-bold text-center mb-6">Produk Terbaru</h2>
             <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 @foreach ($newsProducts as $newsProduct)
-                    <x-partials.visitor.card-best-product :newsProduct="$newsProduct" />
+                    <x-partials.visitor.card-new-product :newsProduct="$newsProduct" />
                 @endforeach
             </div>
             <div class="text-center mt-6">
-                <a class="inline-block bg-blue-600 px-6 py-2 rounded-md text-white text-sm hover:bg-blue-500" href="#"
-                    rel="ugc">
+                <a class="inline-block bg-blue-600 px-6 py-2 rounded-md text-white text-sm hover:bg-blue-500"
+                    href="{{ Route('product') }}" rel="ugc">
                     Lihat Selengkapnya
                 </a>
             </div>

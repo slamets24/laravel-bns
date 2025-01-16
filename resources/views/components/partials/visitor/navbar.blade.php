@@ -7,7 +7,7 @@
         <a class="text-sm font-medium hover:underline underline-offset-4" href="/" rel="ugc">
             Home
         </a>
-        <a class="text-sm font-medium hover:underline underline-offset-4" href="/shop.html" rel="ugc">
+        <a class="text-sm font-medium hover:underline underline-offset-4" href="{{ Route('product') }}" rel="ugc">
             Toko
         </a>
         <a class="text-sm font-medium hover:underline underline-offset-4" href="/about.html" rel="ugc">

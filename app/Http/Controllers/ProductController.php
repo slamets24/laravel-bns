@@ -241,4 +241,25 @@ class ProductController extends Controller
         Alert::toast('Berhasil menghapus data Gambar', 'success');
         return redirect()->route('products.edit', $product);
     }
+
+    public function toggleFavorite($id)
+    {
+        $product = Product::findOrFail($id);
+
+        // Hitung jumlah produk favorit
+        $favoriteCount = Product::where('is_favorit', true)->count();
+
+        // Jika ingin menambah favorit tapi sudah mencapai batas, beri pesan error
+        if (!$product->is_favorit && $favoriteCount >= 4) {
+            Alert::toast('Maksimal hanya 4 produk yang bisa dijadikan favorit.', 'error');
+            return redirect()->route('products.index');
+        }
+
+        // Toggle favorit status
+        $product->is_favorit = !$product->is_favorit;
+        $product->save();
+
+        Alert::toast($product->is_favorit ? 'Produk berhasil ditambahkan ke favorit.' : 'Produk berhasil dihapus dari favorit.', 'success');
+        return redirect()->route('products.index');
+    }
 }

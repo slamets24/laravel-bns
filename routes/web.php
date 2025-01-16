@@ -9,7 +9,8 @@ use App\Http\Controllers\ProfileController;
 
 
 Route::get('/', [FrontendController::class, 'index']);
-Route::get('/product/{slug}', [FrontendController::class, 'product'])->name('detailProduct');
+Route::get('/product/{slug}', [FrontendController::class, 'detailProduct'])->name('detailProduct');
+Route::get('/product', [FrontendController::class, 'product'])->name('product');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -18,6 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('/users', UserController::class);
     Route::resource('/products', ProductController::class);
+    Route::post('/products/{product}/toggle-favorite', [ProductController::class, 'toggleFavorite'])->name('products.toggle-favorite');
     Route::post('/products/{product}/images', [ProductController::class, 'addImages'])->name('products.addImages');
     Route::post('/products/{product}/color', [ProductController::class, 'addColor'])->name('products.addColor');
     Route::delete('/products/{product}/color/{color}', [ProductController::class, 'destroyColor'])->middleware('check.remaining.colors')->name('products.destroyColor');

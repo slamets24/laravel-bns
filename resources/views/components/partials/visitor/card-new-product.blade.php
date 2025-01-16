@@ -1,20 +1,17 @@
-<div class="flex flex-col items-start bg-white p-4 rounded-lg shadow-md h-full">
-    {{-- Gambar Produk --}}
-    <div class="w-full h-48 overflow-hidden rounded-lg">
-        <img src="{{ isset($product->images[0]) ? Storage::url($product->images[0]->name) : 'https://picsum.photos/300/300?random=' . rand(1, 1000) }}"
-            alt="{{ $product->name }}" class="object-cover w-full h-full" />
-    </div>
-    {{-- Info Produk --}}
+<!-- Product 1 -->
+<div class="flex flex-col items-start space-y-2">
+    <img src="{{ isset($newsProduct->images[0]) ? Storage::url($newsProduct->images[0]->name) : 'https://picsum.photos/300/300?random=' . rand(1, 1000) }}"
+        width="300" height="300" alt="{{ $newsProduct->name }}"
+        class="mx-auto aspect-square overflow-hidden rounded-xl object-cover" />
     <div class="flex justify-between w-full">
         <div>
-            <a href="{{ Route('detailProduct', $product->slug) }}">
-                <h3 class="text-sm sm:text-lg font-medium text-gray-900">{{ $product->name }}</h3>
+            <a href="{{ Route('detailProduct', [$newsProduct->slug]) }}">
+                <h3 class="text-lg font-medium">{{ $newsProduct->name }}</h3>
             </a>
-            <p class="text-sm text-gray-600">Rp. {{ number_format($product->price) }}</p>
+            <p class="text-sm text-gray-600">Rp{{ number_format($newsProduct->price) }}</p>
         </div>
-        {{-- Tombol WA --}}
-        <a href="https://wa.me/6282240338227?text=Halo,%20saya%20tertarik%20untuk%20memesan%20{{ urlencode($product->name) }}.%20Bisakah%20anda%20memberikan%20informasi%20lebih%20lanjut?"
-            class="text-green-500 mt-3">
+        <a href="https://wa.me/6282240338227?text=Halo,%20saya%20tertarik%20untuk%20memesan%20{{ urlencode($newsProduct->name) }}.%20Bisakah%20anda%20memberikan%20informasi%20lebih%20lanjut?"
+            class="text-green-500">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                 viewBox="0 0 24 24">
                 <path
